@@ -1,10 +1,10 @@
 # flutter_provider_mvvm
 
-A new Flutter project.
+A Complete Flutter Provider with MVVM 
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project have code Structures and APIs with Provider MVVM
 
 A few resources to get you started if this is your first Flutter project:
 
