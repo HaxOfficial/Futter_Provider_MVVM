@@ -28,6 +28,10 @@ class InvalidInputException extends AppException {
   InvalidInputException([String? message]) : super(message, "Invalid Input");
 }
 
+class InternalServerException extends AppException {
+  InternalServerException([String? message]) : super(message, "Internal Server Error");
+}
+
 
 
 
