@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_provider_mvvm/utils/routes/routes_name.dart';
-import 'package:flutter_provider_mvvm/view/login_screen.dart';
+import 'package:flutter_provider_mvvm/view/login_view.dart';
 import 'package:flutter_provider_mvvm/view/my_home_page.dart';
 
 class Routes {
@@ -14,7 +14,7 @@ class Routes {
         return MaterialPageRoute(builder: (BuildContext context) => MyHomePage());
 
       case RoutesName.login :
-        return MaterialPageRoute(builder: (BuildContext context) => LoginScreen());
+        return MaterialPageRoute(builder: (BuildContext context) => LoginView());
 
         // Todo : We can Add many routes as we can
 
