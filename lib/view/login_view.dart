@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_provider_mvvm/resources/componenets/round_button.dart';
-import 'package:flutter_provider_mvvm/utils/routes/routes_name.dart';
 import 'package:flutter_provider_mvvm/utils/utils.dart';
+import 'package:flutter_provider_mvvm/view_model/auth_view_model.dart';
+import 'package:provider/provider.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -31,7 +32,8 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    
+
+    final authViewModel = Provider.of<AuthViewModel>(context);
     final height = MediaQuery.of(context).size.height * 1;
 
     return Scaffold(
@@ -98,16 +100,23 @@ class _LoginViewState extends State<LoginView> {
 
             SizedBox(height: height * .03,),
 
-            RoundButton(title: "Login", onPress: (){
+            RoundButton(title: "Login",
+                loading: authViewModel.loading,
+                onPress: (){
               if(_emailController.text.isEmpty) {
-                Utils.flushBarErrorMessages("Enter Email", context);
+                Utils.flushBarErrorMessages("Enter Email", "Email", context);
               } else if (_passwordController.text.isEmpty) {
-                Utils.flushBarErrorMessages("Enter Password", context);
+                Utils.flushBarErrorMessages("Enter Password", "Password", context);
               } else if(_passwordController.text.length < 6) {
-                Utils.flushBarErrorMessages("Password should be minimum 6 digit", context);
+                Utils.flushBarErrorMessages("Password should be minimum 6 digit", "Password", context);
               } else {
                 // Todo : Login API
-                Utils.toastMessage("Login Successful");
+                Map data = {
+                  "email" : _emailController.text.toString(),
+                  "password" : _passwordController.text.toString(),
+                };
+
+                authViewModel.loginApi(data, context);
               }
             })
           ],

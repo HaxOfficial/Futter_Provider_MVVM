@@ -15,13 +15,13 @@ class Utils {
   }
 
   // Todo : Flush Bar
-  static void flushBarErrorMessages(String message, BuildContext context) {
+  static void flushBarErrorMessages(String message, String title, BuildContext context) {
     showFlushbar(
         context: context,
         flushbar: Flushbar(
           message: message,
           backgroundColor: Colors.red.shade100,
-          title: "Login Status",
+          title: title,
           titleColor: Colors.black,
           messageColor: Colors.black,
           duration: Duration(seconds: 5),
@@ -38,6 +38,35 @@ class Utils {
           icon: Icon(
             Icons.error,
             color: Colors.red,
+            size: 30,
+          ),
+        )..show(context));
+  }
+
+  // Todo : Flush Bar Success
+  static void flushBarSuccessMessages(String message, String title, BuildContext context) {
+    showFlushbar(
+        context: context,
+        flushbar: Flushbar(
+          message: message,
+          backgroundColor: Colors.green.shade100,
+          title: title,
+          titleColor: Colors.black,
+          messageColor: Colors.black,
+          duration: Duration(seconds: 5),
+          // showProgressIndicator: true,
+          // progressIndicatorBackgroundColor: Colors.white,
+          // progressIndicatorValueColor: Colors.green,
+          forwardAnimationCurve: Curves.decelerate,
+          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: EdgeInsets.all(15),
+          borderRadius: BorderRadius.circular(10),
+          reverseAnimationCurve: Curves.easeOut,
+          flushbarPosition: FlushbarPosition.BOTTOM,
+          positionOffset: 20,
+          icon: Icon(
+            Icons.verified_user_rounded,
+            color: Colors.green,
             size: 30,
           ),
         )..show(context));
