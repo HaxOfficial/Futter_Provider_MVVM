@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_provider_mvvm/utils/routes/routes_name.dart';
 import 'package:flutter_provider_mvvm/view/login_view.dart';
 import 'package:flutter_provider_mvvm/view/my_home_page.dart';
+import 'package:flutter_provider_mvvm/view/signup_view.dart';
 
 class Routes {
 
@@ -15,6 +16,9 @@ class Routes {
 
       case RoutesName.login :
         return MaterialPageRoute(builder: (BuildContext context) => LoginView());
+
+      case RoutesName.signUp :
+        return MaterialPageRoute(builder: (BuildContext context) => SignUpView());
 
         // Todo : We can Add many routes as we can
 
