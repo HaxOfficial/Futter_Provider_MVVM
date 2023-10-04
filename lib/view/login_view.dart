@@ -32,7 +32,7 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    final authViewModel = Provider.of<AuthViewModel>(context);
+    // final authViewModel = Provider.of<AuthViewModel>(context);
     final height = MediaQuery.of(context).size.height * 1;
 
     return Scaffold(
@@ -99,31 +99,35 @@ class _LoginViewState extends State<LoginView> {
             SizedBox(
               height: height * .03,
             ),
-            RoundButton(
-                title: "Login",
-                loading: authViewModel.loading,
-                onPress: () {
-                  if (_emailController.text.isEmpty) {
-                    Utils.flushBarErrorMessages(
-                        "Enter Email", "Email", context);
-                  } else if (_passwordController.text.isEmpty) {
-                    Utils.flushBarErrorMessages(
-                        "Enter Password", "Password", context);
-                  } else if (_passwordController.text.length < 6) {
-                    Utils.flushBarErrorMessages(
-                        "Password should be minimum 6 digit",
-                        "Password",
-                        context);
-                  } else {
-                    // Todo : Login API
-                    Map data = {
-                      "email": _emailController.text.toString(),
-                      "password": _passwordController.text.toString(),
-                    };
 
-                    authViewModel.loginApi(data, context);
-                  }
-                }),
+            Consumer<AuthViewModel>(builder: (context, value, child) {
+              return RoundButton(
+                  title: "Login",
+                  loading: value.loading,
+                  onPress: () {
+                    if (_emailController.text.isEmpty) {
+                      Utils.flushBarErrorMessages(
+                          "Enter Email", "Email", context);
+                    } else if (_passwordController.text.isEmpty) {
+                      Utils.flushBarErrorMessages(
+                          "Enter Password", "Password", context);
+                    } else if (_passwordController.text.length < 6) {
+                      Utils.flushBarErrorMessages(
+                          "Password should be minimum 6 digit",
+                          "Password",
+                          context);
+                    } else {
+                      // Todo : Login API
+                      Map data = {
+                        "email": _emailController.text.toString(),
+                        "password": _passwordController.text.toString(),
+                      };
+
+                      value.loginApi(data, context);
+                    }
+                  });
+            }),
+
             SizedBox(
               height: height * .02,
             ),

@@ -34,7 +34,7 @@ class _SignUpViewState extends State<SignUpView> {
 
   @override
   Widget build(BuildContext context) {
-    final authViewModel = Provider.of<AuthViewModel>(context);
+    // final authViewModel = Provider.of<AuthViewModel>(context);
     final height = MediaQuery.of(context).size.height * 1;
 
     return Scaffold(
@@ -101,32 +101,60 @@ class _SignUpViewState extends State<SignUpView> {
             SizedBox(
               height: height * .03,
             ),
-            RoundButton(
-                title: "Sign Up",
-                loading: authViewModel.signUpLoading,
-                onPress: () {
-                  if (_emailController.text.isEmpty) {
-                    Utils.flushBarErrorMessages(
-                        "Enter Email", "Email", context);
-                  } else if (_passwordController.text.isEmpty) {
-                    Utils.flushBarErrorMessages(
-                        "Enter Password", "Password", context);
-                  } else if (_passwordController.text.length < 6) {
-                    Utils.flushBarErrorMessages(
-                        "Password should be minimum 6 digit",
-                        "Password",
-                        context);
-                  } else {
-                    // Todo : Register API
-                    Map data = {
-                      "email": _emailController.text.toString(),
-                      "password": _passwordController.text.toString(),
-                    };
+            Consumer<AuthViewModel>(builder: (context, value, child){
+              return RoundButton(
+                  title: "Sign Up",
+                  loading: value.signUpLoading,
+                  onPress: () {
+                    if (_emailController.text.isEmpty) {
+                      Utils.flushBarErrorMessages(
+                          "Enter Email", "Email", context);
+                    } else if (_passwordController.text.isEmpty) {
+                      Utils.flushBarErrorMessages(
+                          "Enter Password", "Password", context);
+                    } else if (_passwordController.text.length < 6) {
+                      Utils.flushBarErrorMessages(
+                          "Password should be minimum 6 digit",
+                          "Password",
+                          context);
+                    } else {
+                      // Todo : Register API
+                      Map data = {
+                        "email": _emailController.text.toString(),
+                        "password": _passwordController.text.toString(),
+                      };
 
-                    authViewModel.registerApi(data, context);
+                      value.registerApi(data, context);
 
-                  }
-                }),
+                    }
+                  });
+            }),
+            // RoundButton(
+            //     title: "Sign Up",
+            //     loading: authViewModel.signUpLoading,
+            //     onPress: () {
+            //       if (_emailController.text.isEmpty) {
+            //         Utils.flushBarErrorMessages(
+            //             "Enter Email", "Email", context);
+            //       } else if (_passwordController.text.isEmpty) {
+            //         Utils.flushBarErrorMessages(
+            //             "Enter Password", "Password", context);
+            //       } else if (_passwordController.text.length < 6) {
+            //         Utils.flushBarErrorMessages(
+            //             "Password should be minimum 6 digit",
+            //             "Password",
+            //             context);
+            //       } else {
+            //         // Todo : Register API
+            //         Map data = {
+            //           "email": _emailController.text.toString(),
+            //           "password": _passwordController.text.toString(),
+            //         };
+            //
+            //         authViewModel.registerApi(data, context);
+            //
+            //       }
+            //     }),
             SizedBox(
               height: height * .02,
             ),
