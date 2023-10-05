@@ -6,4 +6,6 @@ class RoutesName {
   static const String home = "home_screen";
   // Todo : SignUp routes name
   static const String signUp = "signup_screen";
+  // Todo : SplashView routes name
+  static const String splashView = "splash_screen";
 }
