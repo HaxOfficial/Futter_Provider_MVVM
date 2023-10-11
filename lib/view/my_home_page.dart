@@ -10,27 +10,40 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+
+/// Login email : eve.holt@reqres.in
+
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final userPreference = Provider.of<UserViewModel>(context);
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text("MVVM"),
-      //   centerTitle: true,
-      // ),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        actions: [ InkWell(
+            onTap: () {
+              userPreference.remove().then((value){
+                Navigator.pushReplacementNamed(context, RoutesName.login);
+              });
+            },
+            child: Padding(
+              padding: EdgeInsets.only(right: 10),
+              child: Center(
+                child: Row(
+                  children: const [
+                    Text("Logout"),
+                    SizedBox(width: 5,),
+                    Icon(Icons.logout, color: Colors.white,),
+                  ],
+                ),
+              ),
+            )),
+        ],
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: Center(
-            child: InkWell(
-                onTap: () {
-                  userPreference.remove().then((value){
-                    Navigator.pushReplacementNamed(context, RoutesName.login);
-                  });
-                },
-                child: Text(
-                  "Logout",
-                  style: TextStyle(fontSize: 25),
-                ))),
+            child: Text("")),
       ),
     );
   }

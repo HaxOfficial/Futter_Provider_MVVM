@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_provider_mvvm/model/user_model.dart';
 import 'package:flutter_provider_mvvm/repository/auth_repository.dart';
 import 'package:flutter_provider_mvvm/utils/routes/routes_name.dart';
 import 'package:flutter_provider_mvvm/utils/utils.dart';
@@ -32,6 +33,15 @@ class AuthViewModel with ChangeNotifier {
     setLoading(true);
     _myRepo.loginApi(data).then((value){
       setLoading(false);
+
+      // Now we are setting data to Shared Preference Here
+      final userPreference = Provider.of<UserViewModel>(context, listen: false);
+      userPreference.saveUser(
+        UserModel(
+          token: value["token"].toString()
+        )
+      );
+
       Utils.flushBarSuccessMessages(value.toString(), "Login Successful", context);
       // final authViewModel = Provider.of<UserViewModel>(context);
       // authViewModel.saveUser()
